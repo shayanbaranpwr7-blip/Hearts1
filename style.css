@@ -216,3 +216,14 @@ body {
     }
 
 }
+#rain {
+    z-index: 3;
+}
+
+#stars {
+    z-index: 0;
+}
+
+.welcome {
+    z-index: 4;
+}
