@@ -1,121 +1,94 @@
-const scene = document.getElementById("scene");
+const canvas = document.getElementById("canvas");
 
-const starScene = new THREE.Scene();
+const ctx = canvas.getContext("2d");
 
-const camera = new THREE.PerspectiveCamera(
-    75,
-    window.innerWidth / window.innerHeight,
-    0.1,
-    1000
-);
+let stars = [];
 
-const renderer = new THREE.WebGLRenderer({
-    alpha: true,
-    antialias: true
-});
+function resize(){
 
-renderer.setSize(
-    window.innerWidth,
-    window.innerHeight
-);
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-scene.appendChild(renderer.domElement);
+}
 
+resize();
 
-camera.position.z = 5;
+window.addEventListener("resize", resize);
 
 
 
-const starGeometry = new THREE.BufferGeometry();
+for(let i = 0; i < 250; i++){
 
-const starPositions = [];
+    stars.push({
 
-for(let i = 0; i < 3000; i++){
+        x: Math.random() * canvas.width,
 
-    starPositions.push(
-        (Math.random() - 0.5) * 200,
-        (Math.random() - 0.5) * 200,
-        (Math.random() - 0.5) * 200
-    );
+        y: Math.random() * canvas.height,
+
+        size: Math.random() * 2 + 0.5,
+
+        speed: Math.random() * 0.3 + 0.1
+
+    });
 
 }
 
 
-starGeometry.setAttribute(
-    "position",
-    new THREE.Float32BufferAttribute(
-        starPositions,
-        3
-    )
-);
 
+function draw(){
 
-const starMaterial = new THREE.PointsMaterial({
-
-    color:0xffffff,
-
-    size:0.5
-
-});
-
-
-const stars = new THREE.Points(
-    starGeometry,
-    starMaterial
-);
-
-
-starScene.add(stars);
-
-
-
-function animate(){
-
-    requestAnimationFrame(animate);
-
-    stars.rotation.y += 0.0005;
-
-    renderer.render(
-        starScene,
-        camera
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
     );
 
-}
+
+    ctx.fillStyle = "white";
 
 
-animate();
+    stars.forEach(star=>{
 
+        ctx.beginPath();
 
-
-window.addEventListener(
-    "resize",
-    ()=>{
-
-        camera.aspect =
-        window.innerWidth /
-        window.innerHeight;
-
-        camera.updateProjectionMatrix();
-
-        renderer.setSize(
-            window.innerWidth,
-            window.innerHeight
+        ctx.arc(
+            star.x,
+            star.y,
+            star.size,
+            0,
+            Math.PI * 2
         );
 
-    }
-);
+        ctx.fill();
+
+
+        star.y += star.speed;
+
+
+        if(star.y > canvas.height){
+
+            star.y = 0;
+
+        }
+
+    });
+
+
+    requestAnimationFrame(draw);
+
+}
+
+
+draw();
 
 
 
-const button =
-document.getElementById("startButton");
+const button = document.getElementById("startButton");
 
 
-button.addEventListener(
-"click",
-()=>{
+button.addEventListener("click", ()=>{
 
-    button.innerText =
-    "Entering... 🤍";
+    button.innerText = "Welcome 🤍";
 
 });
