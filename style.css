@@ -4,50 +4,29 @@
     box-sizing:border-box;
 }
 
-html,body{
+body{
+    width:100%;
+    height:100vh;
+    overflow:hidden;
+    background:#050814;
+    font-family:Arial, sans-serif;
+}
 
+
+#canvas{
+    position:fixed;
+    top:0;
+    left:0;
     width:100%;
     height:100%;
-    overflow:hidden;
-
-    font-family:Arial,Helvetica,sans-serif;
-
-    background:#04060f;
-
 }
 
-#scene{
-
-    position:fixed;
-
-    inset:0;
-
-    z-index:0;
-
-}
-
-#overlay{
-
-    position:fixed;
-
-    inset:0;
-
-    background:linear-gradient(
-        to bottom,
-        rgba(5,10,20,.15),
-        rgba(5,10,20,.55)
-    );
-
-    z-index:1;
-
-}
 
 .welcome{
 
     position:absolute;
-
-    left:50%;
     top:50%;
+    left:50%;
 
     transform:translate(-50%,-50%);
 
@@ -56,59 +35,62 @@ html,body{
 
     padding:35px;
 
-    border-radius:25px;
-
     text-align:center;
 
     color:white;
 
-    z-index:5;
+    background:rgba(255,255,255,0.08);
 
-    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,0.2);
 
-    border:1px solid rgba(255,255,255,.15);
+    border-radius:25px;
 
-    backdrop-filter:blur(18px);
-
-    box-shadow:
-        0 0 45px rgba(255,255,255,.12);
-
-    transition:.8s;
+    backdrop-filter:blur(15px);
 
 }
+
 
 h1{
 
     font-size:42px;
 
-    margin-bottom:18px;
-
-    font-weight:600;
+    margin-bottom:20px;
 
 }
+
 
 p{
 
-    opacity:.85;
+    opacity:.8;
 
-    line-height:1.8;
-
-    margin-bottom:28px;
+    line-height:1.7;
 
 }
 
+
 button{
 
-    border:none;
+    margin-top:25px;
 
-    padding:15px 40px;
+    padding:15px 35px;
+
+    border:none;
 
     border-radius:40px;
 
     color:white;
 
-    font-size:16px;
+    background:rgba(255,255,255,.18);
 
     cursor:pointer;
 
-    background:rgba(255,255,
+    font-size:16px;
+
+}
+
+
+button:hover{
+
+    background:rgba(255,255,255,.3);
+
+}
