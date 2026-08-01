@@ -74,7 +74,7 @@ function draw(){
 
     });
 
-
+drawRain();
     requestAnimationFrame(draw);
 
 }
@@ -90,7 +90,9 @@ const button = document.getElementById("startButton");
 button.addEventListener("click", ()=>{
 
     button.innerText = "Welcome 🤍";
+rainStarted = true;
 
+createRain();
 });
 // Rain system
 
