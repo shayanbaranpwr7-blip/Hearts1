@@ -1,18 +1,109 @@
-const button = document.getElementById("startButton");
-const welcome = document.querySelector(".welcome");
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-button.addEventListener("click", () => {
-    button.disabled = true;
-    button.innerText = "Entering... 🤍";
+body{
 
-    welcome.style.transition = "1.8s ease";
-    welcome.style.opacity = "0";
-    welcome.style.transform = "scale(0.95)";
+    overflow:hidden;
 
-    setTimeout(() => {
-        button.innerText = "Welcome 🤍";
-        welcome.style.opacity = "1";
-        welcome.style.transform = "scale(1)";
-        button.disabled = false;
-    }, 1800);
-});
+    background:#050510;
+
+    font-family:Arial,Helvetica,sans-serif;
+
+}
+
+#scene{
+
+    position:fixed;
+
+    width:100%;
+    height:100%;
+
+    top:0;
+    left:0;
+
+    z-index:0;
+
+}
+
+.welcome{
+
+    position:absolute;
+
+    top:50%;
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:90%;
+    max-width:420px;
+
+    text-align:center;
+
+    color:white;
+
+    padding:35px;
+
+    border-radius:25px;
+
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.18);
+
+    box-shadow:0 0 40px rgba(255,255,255,.15);
+
+    z-index:10;
+
+    transition:.8s;
+
+}
+
+h1{
+
+    font-size:46px;
+
+    margin-bottom:18px;
+
+}
+
+p{
+
+    opacity:.8;
+
+    line-height:1.7;
+
+}
+
+button{
+
+    margin-top:28px;
+
+    padding:15px 38px;
+
+    border:none;
+
+    border-radius:40px;
+
+    cursor:pointer;
+
+    color:white;
+
+    background:rgba(255,255,255,.15);
+
+    backdrop-filter:blur(10px);
+
+    transition:.3s;
+
+}
+
+button:hover{
+
+    transform:scale(1.05);
+
+    background:rgba(255,255,255,.25);
+
+        }
