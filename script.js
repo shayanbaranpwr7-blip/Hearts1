@@ -75,7 +75,7 @@ function draw(){
     });
 
 drawRain();
-    requestAnimationFrame(draw);
+    requestAnimationFrame(drawStars);
 
 }
 
@@ -91,7 +91,67 @@ button.addEventListener("click", ()=>{
 
     button.innerText = "Welcome 🤍";
 rainStarted = true;
-
+startRain();
 createRain();
 });
 // Rain system
+let rain = [];
+
+function startRain(){
+
+    rain = [];
+
+    for(let i = 0; i < 150; i++){
+
+        rain.push({
+
+            x: Math.random() * width,
+
+            y: Math.random() * height,
+
+            length: Math.random()*20+10,
+
+            speed: Math.random()*6+4
+
+        });
+
+    }
+
+}
+
+
+function drawRain(){
+
+    ctx.strokeStyle = "rgba(180,220,255,0.5)";
+
+    ctx.lineWidth = 1;
+
+
+    rain.forEach(drop=>{
+
+        ctx.beginPath();
+
+        ctx.moveTo(drop.x, drop.y);
+
+        ctx.lineTo(
+            drop.x,
+            drop.y + drop.length
+        );
+
+        ctx.stroke();
+
+
+        drop.y += drop.speed;
+
+
+        if(drop.y > height){
+
+            drop.y = -20;
+
+            drop.x = Math.random()*width;
+
+        }
+
+    });
+
+}
