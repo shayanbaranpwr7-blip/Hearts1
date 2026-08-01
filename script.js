@@ -3,19 +3,19 @@ const ctx = canvas.getContext("2d");
 
 let stars = [];
 let rain = [];
-let rainStarted = false;
+let rainActive = false;
 
 
-function resize(){
+function resizeCanvas(){
 
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
 }
 
-resize();
+resizeCanvas();
 
-window.addEventListener("resize", resize);
+window.addEventListener("resize", resizeCanvas);
 
 
 
@@ -50,7 +50,7 @@ function createRain(){
 
     rain = [];
 
-    for(let i = 0; i < 150; i++){
+    for(let i = 0; i < 180; i++){
 
         rain.push({
 
@@ -72,11 +72,11 @@ function createRain(){
 
 function drawRain(){
 
-    if(!rainStarted) return;
+    if(!rainActive) return;
 
 
     ctx.strokeStyle =
-    "rgba(180,220,255,0.45)";
+    "rgba(170,210,255,0.5)";
 
 
     ctx.lineWidth = 1;
@@ -103,9 +103,7 @@ function drawRain(){
         ctx.stroke();
 
 
-
         drop.y += drop.speed;
-
 
 
         if(drop.y > canvas.height){
@@ -125,7 +123,8 @@ function drawRain(){
 
 
 
-function draw(){
+function animate(){
+
 
     ctx.clearRect(
         0,
@@ -175,13 +174,14 @@ function draw(){
     drawRain();
 
 
-    requestAnimationFrame(draw);
+    requestAnimationFrame(animate);
 
 }
 
 
+animate();
 
-draw();
+
 
 
 
@@ -189,18 +189,17 @@ const button =
 document.getElementById("startButton");
 
 
-
-button.addEventListener("click", ()=>{
+button.addEventListener("click",()=>{
 
 
     button.innerText =
     "Welcome 🤍";
 
 
-    rainStarted = true;
+    rainActive = true;
 
 
     createRain();
 
 
-}); 
+});
