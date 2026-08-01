@@ -1,27 +1,38 @@
-const canvas = document.getElementById("sky");
+const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
+
 
 let stars = [];
 let rain = [];
+
 let rainActive = false;
 
 
-function resizeCanvas(){
+
+function resize(){
 
     canvas.width = window.innerWidth;
+
     canvas.height = window.innerHeight;
 
 }
 
-resizeCanvas();
 
-window.addEventListener("resize", resizeCanvas);
+resize();
+
+window.addEventListener(
+    "resize",
+    resize
+);
+
+
 
 
 
 function createStars(){
 
     stars = [];
+
 
     for(let i = 0; i < 250; i++){
 
@@ -31,9 +42,9 @@ function createStars(){
 
             y: Math.random() * canvas.height,
 
-            size: Math.random() * 2 + 0.5,
+            size: Math.random()*2 + .5,
 
-            speed: Math.random() * 0.3 + 0.1
+            speed: Math.random()*.3 + .1
 
         });
 
@@ -42,7 +53,10 @@ function createStars(){
 }
 
 
+
 createStars();
+
+
 
 
 
@@ -50,23 +64,26 @@ function createRain(){
 
     rain = [];
 
-    for(let i = 0; i < 180; i++){
+
+    for(let i = 0; i < 150; i++){
 
         rain.push({
 
-            x: Math.random() * canvas.width,
+            x: Math.random()*canvas.width,
 
-            y: Math.random() * canvas.height,
+            y: Math.random()*canvas.height,
 
-            length: Math.random() * 20 + 10,
+            length: Math.random()*20+10,
 
-            speed: Math.random() * 5 + 3
+            speed: Math.random()*5+3
 
         });
 
     }
 
 }
+
+
 
 
 
@@ -76,10 +93,11 @@ function drawRain(){
 
 
     ctx.strokeStyle =
-    "rgba(170,210,255,0.5)";
+    "rgba(170,210,255,.5)";
 
 
     ctx.lineWidth = 1;
+
 
 
     rain.forEach(drop=>{
@@ -103,7 +121,9 @@ function drawRain(){
         ctx.stroke();
 
 
+
         drop.y += drop.speed;
+
 
 
         if(drop.y > canvas.height){
@@ -111,14 +131,18 @@ function drawRain(){
             drop.y = -20;
 
             drop.x =
-            Math.random() * canvas.width;
+            Math.random()*canvas.width;
 
         }
 
 
     });
 
+
 }
+
+
+
 
 
 
@@ -134,7 +158,9 @@ function animate(){
     );
 
 
+
     ctx.fillStyle = "white";
+
 
 
     stars.forEach(star=>{
@@ -144,11 +170,17 @@ function animate(){
 
 
         ctx.arc(
+
             star.x,
+
             star.y,
+
             star.size,
+
             0,
-            Math.PI * 2
+
+            Math.PI*2
+
         );
 
 
@@ -171,15 +203,23 @@ function animate(){
 
 
 
+
     drawRain();
 
 
-    requestAnimationFrame(animate);
+
+    requestAnimationFrame(
+        animate
+    );
+
 
 }
 
 
+
 animate();
+
+
 
 
 
@@ -189,7 +229,10 @@ const button =
 document.getElementById("startButton");
 
 
-button.addEventListener("click",()=>{
+
+button.addEventListener(
+"click",
+()=>{
 
 
     button.innerText =
