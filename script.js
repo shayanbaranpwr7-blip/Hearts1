@@ -1,109 +1,121 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+const scene = document.getElementById("scene");
 
-body{
+const starScene = new THREE.Scene();
 
-    overflow:hidden;
+const camera = new THREE.PerspectiveCamera(
+    75,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    1000
+);
 
-    background:#050510;
+const renderer = new THREE.WebGLRenderer({
+    alpha: true,
+    antialias: true
+});
 
-    font-family:Arial,Helvetica,sans-serif;
+renderer.setSize(
+    window.innerWidth,
+    window.innerHeight
+);
 
-}
+scene.appendChild(renderer.domElement);
 
-#scene{
 
-    position:fixed;
+camera.position.z = 5;
 
-    width:100%;
-    height:100%;
 
-    top:0;
-    left:0;
 
-    z-index:0;
+const starGeometry = new THREE.BufferGeometry();
 
-}
+const starPositions = [];
 
-.welcome{
+for(let i = 0; i < 3000; i++){
 
-    position:absolute;
-
-    top:50%;
-    left:50%;
-
-    transform:translate(-50%,-50%);
-
-    width:90%;
-    max-width:420px;
-
-    text-align:center;
-
-    color:white;
-
-    padding:35px;
-
-    border-radius:25px;
-
-    background:rgba(255,255,255,.08);
-
-    backdrop-filter:blur(18px);
-
-    border:1px solid rgba(255,255,255,.18);
-
-    box-shadow:0 0 40px rgba(255,255,255,.15);
-
-    z-index:10;
-
-    transition:.8s;
+    starPositions.push(
+        (Math.random() - 0.5) * 200,
+        (Math.random() - 0.5) * 200,
+        (Math.random() - 0.5) * 200
+    );
 
 }
 
-h1{
 
-    font-size:46px;
+starGeometry.setAttribute(
+    "position",
+    new THREE.Float32BufferAttribute(
+        starPositions,
+        3
+    )
+);
 
-    margin-bottom:18px;
+
+const starMaterial = new THREE.PointsMaterial({
+
+    color:0xffffff,
+
+    size:0.5
+
+});
+
+
+const stars = new THREE.Points(
+    starGeometry,
+    starMaterial
+);
+
+
+starScene.add(stars);
+
+
+
+function animate(){
+
+    requestAnimationFrame(animate);
+
+    stars.rotation.y += 0.0005;
+
+    renderer.render(
+        starScene,
+        camera
+    );
 
 }
 
-p{
 
-    opacity:.8;
+animate();
 
-    line-height:1.7;
 
-}
 
-button{
+window.addEventListener(
+    "resize",
+    ()=>{
 
-    margin-top:28px;
+        camera.aspect =
+        window.innerWidth /
+        window.innerHeight;
 
-    padding:15px 38px;
+        camera.updateProjectionMatrix();
 
-    border:none;
+        renderer.setSize(
+            window.innerWidth,
+            window.innerHeight
+        );
 
-    border-radius:40px;
+    }
+);
 
-    cursor:pointer;
 
-    color:white;
 
-    background:rgba(255,255,255,.15);
+const button =
+document.getElementById("startButton");
 
-    backdrop-filter:blur(10px);
 
-    transition:.3s;
+button.addEventListener(
+"click",
+()=>{
 
-}
+    button.innerText =
+    "Entering... 🤍";
 
-button:hover{
-
-    transform:scale(1.05);
-
-    background:rgba(255,255,255,.25);
-
-        }
+});
